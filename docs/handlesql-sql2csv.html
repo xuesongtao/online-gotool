@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,28 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 SQL转CSV, 数据库导出CSV, 多数据库, 解析注释, 自定义导出 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，在线SQL转CSV工具 | 数据库表导出为CSV - GoTool在线工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>功能介绍</h3>
+<blockquote>
+<p>1.支持多种数据库的建表 sql转csv, 其中包含(pg、oracle、mysql)等数据库; <strong>建表语句</strong>, <strong>建表语句</strong>, <strong>建表语句</strong>(重要的说3遍)<br>
+2.在转换 sql 的时候, 需要确认下是否需要切换处理类型, 暂时支持3种处理方式(<strong>normal</strong>, <strong>postgresql</strong>, <strong>oracle</strong>), 默认: <strong>normal</strong>.</p>
+</blockquote>
+<!-- raw HTML omitted -->
+<h3>示例</h3>
+<pre><code class="language-sql">CREATE TABLE if not exists user (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(10) NOT NULL COMMENT '姓名',
+    gender tinyint NOT NULL DEFAULT 0 COMMENT '性别 0-未知 1-男 2-女',
+    age int NOT NULL COMMENT '年龄',
+    created_date datetime DEFAULT CURRENT_TIMESTAMP,
+    updated_date datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

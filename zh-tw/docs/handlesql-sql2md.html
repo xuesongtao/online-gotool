@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,40 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 sql 轉 markdown, ddl 轉 markdown, 建表語句轉文檔, sql 轉表結構, sql 文檔生成, 資料庫文檔, 表結構導出, mysql 轉 markdown, postgresql 轉 markdown, oracle 轉 markdown, 在線 sql 工具, markdown 表格, ddl 文檔化, sql doc, schema 文檔, sql 轉 md, ddl to markdown, sql to markdown 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，在線sql轉markdown|生成資料庫表結構文檔 - gotool在線工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>功能居間</h3>
+<blockquote>
+<p>1.支持多種資料庫的建表 sql轉csv, 其中包含(pg、oracle、mysql)等資料庫; <strong>建表語句</strong>, <strong>建表語句</strong>, <strong>建表語句</strong>(重要的說3遍)<br>
+2.在轉換 sql 的時候, 需要確認下是否需要切換處理類型, 暫時支持3種處理方式(<strong>normal</strong>, <strong>postgresql</strong>, <strong>oracle</strong>), 默認: <strong>normal</strong>.</p>
+</blockquote>
+<!-- raw HTML omitted -->
+<h3>示例</h3>
+<pre><code class="language-sql">create table if not exists user (
+    id int not null auto_increment,
+    name varchar(10) not null comment '姓名',
+    gender tinyint not null default 0 comment '性別 0-未知 1-男 2-女',
+    age int not null comment '年齡',
+    created_date datetime default current_timestamp,
+    updated_date datetime default current_timestamp on update current_timestamp,
+    primary key (id)
+);
+</code></pre>
+<p>處理後</p>
+<pre><code class="language-md">## User
+
+| 序號 | 欄位名       | 類型        | 非空 | 鍵  | 默認值            | 描述                  |
+| ---: | ------------ | ----------- | ---- | --- | ----------------- | --------------------- |
+|    1 | id           | int         | no   | pri |                   |                       |
+|    2 | name         | varchar(10) | no   |     |                   | 姓名                  |
+|    3 | gender       | tinyint     | no   |     | 0                 | 性別 0-未知 1-男 2-女 |
+|    4 | age          | int         | no   |     |                   | 年齡                  |
+|    5 | created_date | datetime    | yes  |     | current_timestamp |                       |
+|    6 | updated_date | datetime    | yes  |     | current_timestamp |                       |
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

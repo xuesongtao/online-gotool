@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,38 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 XML转JSON, 格式转换, 数据交换, 在线转换 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，在线XML转JSON | 快速格式转换 - GoTool在线工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>功能介绍</h3>
+<blockquote>
+<p>1.在线xml转json<br>
+2.<strong>说明</strong>: 由于转换过程中, xml 树的子节点是用 map 保存, 因此在转 json 后, 得到的结果顺序是无序的</p>
+</blockquote>
+<h3>示例</h3>
+<h4>解析嵌套 json 串</h4>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;user&gt;
+    &lt;id&gt;&lt;/id&gt;
+    &lt;name&gt;姓名&lt;/name&gt;
+    &lt;gender&gt;性别 0-未知 1-男 2-女&lt;/gender&gt;
+    &lt;age&gt;年龄&lt;/age&gt;
+    &lt;created_date&gt;&lt;/created_date&gt;
+    &lt;updated_date&gt;&lt;/updated_date&gt;
+&lt;/user&gt;
+</code></pre>
+<p>处理后</p>
+<pre><code class="language-json">{
+	&quot;id&quot;: &quot;&quot;,
+	&quot;name&quot;: &quot;姓名&quot;,
+	&quot;gender&quot;: &quot;性别 0-未知 1-男 2-女&quot;,
+	&quot;age&quot;: &quot;年龄&quot;,
+	&quot;created_date&quot;: &quot;&quot;,
+	&quot;updated_date&quot;: &quot;&quot;
+}
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,197 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 SQL to ES Mapping, SQL document to ES Mapping, Elasticsearch to ES Mapping, ES Mapping entity class generation, ES Schema conversion, online ES tool, interface document generation, ES documentation, API document to ES Mapping 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，SQL to ES Mapping tool| Online SQL Document to ES Mapping Generator| GoTool online toolset 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>feature introduction</h3>
+<blockquote>
+<ol>
+<li>Table creation sql to json supporting multiple databases, including (pg, oracle, mysql) and other databases;<strong>table-building statements</strong>,<strong>table-building statements</strong>,<strong>table-building statements</strong>(important statements are said 3 times)</li>
+<li>When converting sql, you need to confirm whether you need to switch the processing type. Three processing methods are temporarily supported (<strong>normal</strong>,<strong>postgresql</strong>,<strong>oracle</strong>). Default:<strong>normal</strong>.</li>
+<li>Support custom filtering of unwanted fields. Multiple fields are separated by <strong>,</strong>.</li>
+</ol>
+</blockquote>
+<!-- raw HTML omitted -->
+<h3>example</h3>
+<h4>mysql table statement</h4>
+<pre><code class="language-sql">CREATE TABLE if not exists user (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(10) NOT NULL COMMENT 'name ',
+    gender tinyint NOT NULL DEFAULT 0 COMMENT 'Gender 0 -unknown 1 -male 2 -female ',
+    age int NOT NULL COMMENT 'age ',
+    created_date datetime DEFAULT CURRENT_TIMESTAMP,
+    updated_date datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+</code></pre>
+<p>After treatment</p>
+<pre><code class="language-json">{
+  &quot;mappings&quot;: {
+    &quot;properties&quot;: {
+      &quot;id&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;
+      },
+      &quot;name&quot;: {
+        &quot;fields&quot;: {
+          &quot;keyword&quot;: {
+            &quot;ignore_above&quot;: 256,
+            &quot;type&quot;: &quot;keyword&quot;
+          }
+        },
+        &quot;meta&quot;: {
+          &quot;description&quot;: &quot;name&quot;
+        },
+        &quot;type&quot;: &quot;text&quot;
+      },
+      &quot;gender&quot;: {
+        &quot;meta&quot;: {
+          &quot;description&quot;: &quot;Gender 0 -unknown 1 -male 2 -female&quot;
+        },
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      &quot;age&quot;: {
+        &quot;meta&quot;: {
+          &quot;description&quot;: &quot;age&quot;
+        },
+        &quot;type&quot;: &quot;keyword&quot;
+      },
+      &quot;created_date&quot;: {
+        &quot;format&quot;: &quot;yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis&quot;,
+        &quot;type&quot;: &quot;date&quot;
+      },
+      &quot;updated_date&quot;: {
+        &quot;format&quot;: &quot;yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis&quot;,
+        &quot;type&quot;: &quot;date&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<h4>pgsql table statement</h4>
+<pre><code class="language-sql">CREATE TABLE if not exists user (
+    id character varying (32) NOT NULL DEFAULT sys_guid ()
+    name character varying (10) NOT NULL
+    gender tinyint NOT NULL
+    age tinyint NOT NULL
+    created_date timestamp without time zone DEFAULT now ()
+    updated_date timestamp without time zone DEFAULT now ()
+    CONSTRAINT user_pkey PRIMARY KEY (id)
+);
+COMMENT ON TABLE user IS 'user Table'
+COMMENT ON COLUMN user.id IS 'primary key'
+COMMENT ON COLUMN user.name IS 'name'
+COMMENT ON COLUMN user.gender IS 'Sex 0-unknown 1-male 2-female'
+COMMENT ON COLUMN user.age IS 'age'
+COMMENT ON COLUMN user.created_date IS 'creation time'
+COMMENT ON COLUMN user.updated_date IS 'update time'
+</code></pre>
+<p>After treatment</p>
+<pre><code class="language-json">{
+  &quot;mappings&quot;: {
+    &quot;properties&quot;: {
+      &quot;id&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;
+      },
+      &quot;name&quot;: {
+        &quot;fields&quot;: {
+          &quot;keyword&quot;: {
+            &quot;ignore_above&quot;: 256,
+            &quot;type&quot;: &quot;keyword&quot;
+          }
+        },
+        &quot;meta&quot;: {
+          &quot;description&quot;: &quot;name&quot;
+        },
+        &quot;type&quot;: &quot;text&quot;
+      },
+      &quot;gender&quot;: {
+        &quot;meta&quot;: {
+          &quot;description&quot;: &quot;Gender 0 -unknown 1 -male 2 -female&quot;
+        },
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      &quot;age&quot;: {
+        &quot;meta&quot;: {
+          &quot;description&quot;: &quot;age&quot;
+        },
+        &quot;type&quot;: &quot;keyword&quot;
+      },
+      &quot;created_date&quot;: {
+        &quot;format&quot;: &quot;yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis&quot;,
+        &quot;type&quot;: &quot;date&quot;
+      },
+      &quot;updated_date&quot;: {
+        &quot;format&quot;: &quot;yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis&quot;,
+        &quot;type&quot;: &quot;date&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<h4>oracle table statement</h4>
+<pre><code class="language-sql">CREATE TABLE if not exists user (
+    id character varying (32) NOT NULL DEFAULT sys_guid ()
+    name character varying (10) NOT NULL
+    gender tinyint NOT NULL
+    age tinyint NOT NULL
+    created_date date default sysdate
+    updated_date date default sysdate
+    CONSTRAINT user_pkey PRIMARY KEY (id)
+);
+COMMENT ON TABLE user IS 'user Table'
+COMMENT ON COLUMN user.id IS 'primary key'
+COMMENT ON COLUMN user.name IS 'name'
+COMMENT ON COLUMN user.gender IS 'Sex 0-unknown 1-male 2-female'
+COMMENT ON COLUMN user.age IS 'age'
+COMMENT ON COLUMN user.created_date IS 'creation time'
+COMMENT ON COLUMN user.updated_date IS 'update time'
+</code></pre>
+<p>After treatment</p>
+<pre><code class="language-json">{
+  &quot;mappings&quot;: {
+    &quot;properties&quot;: {
+      &quot;id&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;
+      },
+      &quot;name&quot;: {
+        &quot;fields&quot;: {
+          &quot;keyword&quot;: {
+            &quot;ignore_above&quot;: 256,
+            &quot;type&quot;: &quot;keyword&quot;
+          }
+        },
+        &quot;meta&quot;: {
+          &quot;description&quot;: &quot;name&quot;
+        },
+        &quot;type&quot;: &quot;text&quot;
+      },
+      &quot;gender&quot;: {
+        &quot;meta&quot;: {
+          &quot;description&quot;: &quot;Gender 0 -unknown 1 -male 2 -female&quot;
+        },
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      &quot;age&quot;: {
+        &quot;meta&quot;: {
+          &quot;description&quot;: &quot;age&quot;
+        },
+        &quot;type&quot;: &quot;keyword&quot;
+      },
+      &quot;created_date&quot;: {
+        &quot;format&quot;: &quot;yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis&quot;,
+        &quot;type&quot;: &quot;date&quot;
+      },
+      &quot;updated_date&quot;: {
+        &quot;format&quot;: &quot;yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis&quot;,
+        &quot;type&quot;: &quot;date&quot;
+      }
+    }
+  }
+}
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

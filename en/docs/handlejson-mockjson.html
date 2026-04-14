@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,59 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 Mock JSON, online Mock service, simulation API, custom parameters, JSON generator 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，Online Mock JSON API| Quickly generate simulation data- GoTool online toolset 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>Function introduction</h3>
+<blockquote>
+<ol>
+<li>Use the entered json string as the return parameter</li>
+<li>Support url parameters</li>
+<li>The output of the generated url is mainly determined by the 'token' parameter. Do not modify the 'token'</li>
+</ol>
+</blockquote>
+<h3>Usage examples</h3>
+<blockquote>
+<ol>
+<li>No request parameters</li>
+</ol>
+</blockquote>
+<pre><code class="language-json">[
+	{
+		&quot;id&quot;: 1,
+		&quot;name&quot;: &quot;test&quot;,
+		&quot;age&quot;: 10,
+		&quot;cls_name&quot;: &quot;first day&quot;,
+		&quot;addr&quot;: &quot;Chengdu, Sichuan&quot;
+	},
+	{
+		&quot;id&quot;: 2,
+		&quot;name&quot;: &quot;test&quot;,
+		&quot;age&quot;: 10,
+		&quot;cls_name&quot;: &quot;second day&quot;,
+		&quot;addr&quot;: &quot;Chengdu, Sichuan&quot;
+	}
+]
+</code></pre>
+<p>after treatment</p>
+<p><code>http://localhost:9000/toolapi/mockjson?come_from=2&amp;token=d491e4e9771c051021fdcf568cc369c4</code></p>
+<blockquote>
+<ol start="2">
+<li>With parameters</li>
+</ol>
+</blockquote>
+<pre><code class="language-json">{
+	&quot;id&quot;: 1,
+	&quot;name&quot;: &quot;test&quot;,
+	&quot;age&quot;: 10,
+	&quot;cls_name&quot;: &quot;first day&quot;,
+	&quot;addr&quot;: &quot;Chengdu, Sichuan&quot;
+}
+</code></pre>
+<p>after treatment</p>
+<p><code>http://localhost:9000/toolapi/mockjson? come_from=2&amp;user_id=1&amp;token=c7e6d7031b9911793b0b5ae83f50a9a8</code></p>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

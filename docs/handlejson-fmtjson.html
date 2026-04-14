@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,71 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 JSON格式化, JSON美化, JSON校验, 转义JSON, 错误标记, 在线JSON工具 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，在线JSON格式化工具 | 美化/压缩/校验 - GoTool在线工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>功能介绍</h3>
+<blockquote>
+<p>1.对待格式化的 <code>json</code> 串进行格式化/压缩, 同时支持转义; 去注释会根据通过正则将 <code>#|//|--</code> 替换处理<br>
+2.支持对字符串包含的 <code>json</code> 串进行转义<br>
+3.对格式错误的会提示在什么位有错误</p>
+</blockquote>
+<h3>示例</h3>
+<h4>1.正确格式的</h4>
+<pre><code class="language-json">{&quot;name&quot;:&quot;test&quot;,&quot;age&quot;:10,&quot;addr&quot;:&quot;四川成都&quot;,&quot;cls_info&quot;:[{&quot;name&quot;:&quot;篮球班&quot;,&quot;teacher&quot;:&quot;张老师&quot;},{&quot;name&quot;:&quot;美术班&quot;,&quot;teacher&quot;:&quot;李老师&quot;}]}
+</code></pre>
+<p>处理后</p>
+<pre><code class="language-json">{
+    &quot;name&quot;: &quot;test&quot;,
+    &quot;age&quot;: 10,
+    &quot;addr&quot;: &quot;四川成都&quot;,
+    &quot;cls_info&quot;: [
+        {
+            &quot;name&quot;: &quot;篮球班&quot;,
+            &quot;teacher&quot;: &quot;张老师&quot;
+        },
+        {
+            &quot;name&quot;: &quot;美术班&quot;,
+            &quot;teacher&quot;: &quot;李老师&quot;
+        }
+    ]
+}
+</code></pre>
+<!-- raw HTML omitted -->
+<h4>2.错误的格式</h4>
+<pre><code class="language-json">{&quot;name&quot;:&quot;test&quot;,&quot;age&quot;:10,&quot;addr&quot;:&quot;四川成都&quot;&quot;cls_info&quot;:[{name&quot;:&quot;篮球班&quot;,&quot;teacher&quot;:&quot;张老师&quot;},{&quot;name&quot;:&quot;美术班&quot;,&quot;teacher&quot;:&quot;李老师&quot;}]}
+</code></pre>
+<p>处理后</p>
+<pre><code class="language-json">错误如下:
+
+川成都&quot;XXX&quot;cls_info&quot;:[{n&quot;
+
+XXX附近有错误, 确认是否符号缺少或多余
+</code></pre>
+<p><strong>说明</strong>: 错误出现在 <strong>XXX</strong> 附近, 建议进行搜索查看</p>
+<!-- raw HTML omitted -->
+<h4>3.包含json串</h4>
+<pre><code class="language-json">name=test&amp;age=12&amp;other={&quot;name&quot;:&quot;test&quot;,&quot;age&quot;:10,&quot;addr&quot;:&quot;四川成都&quot;,&quot;cls_info&quot;:[{&quot;name&quot;:&quot;篮球班&quot;,&quot;teacher&quot;:&quot;张老师&quot;},{&quot;name&quot;:&quot;美术班&quot;,&quot;teacher&quot;:&quot;李老师&quot;}]}
+</code></pre>
+<p>处理后</p>
+<pre><code class="language-json">name=test&amp;age=12&amp;other={
+    &quot;name&quot;: &quot;test&quot;,
+    &quot;age&quot;: 10,
+    &quot;addr&quot;: &quot;四川成都&quot;,
+    &quot;cls_info&quot;: [
+        {
+            &quot;name&quot;: &quot;篮球班&quot;,
+            &quot;teacher&quot;: &quot;张老师&quot;
+        },
+        {
+            &quot;name&quot;: &quot;美术班&quot;,
+            &quot;teacher&quot;: &quot;李老师&quot;
+        }
+    ]
+}
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

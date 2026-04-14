@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,54 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 Git command, quick lookup table, Git tutorial, version control 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，Quick lookup table of Git commonly used commands| Online Git Command Manual- GoTool Online Toolset 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h4>Push local projects to remote warehouses</h4>
+<pre><code class="language-shell">git init 
+
+git add .
+
+git commit -m &quot;feat: xxx&quot;
+
+git remote add origin https://xxx
+
+git pull --rebase origin xxx
+
+git push -u origin xxx
+</code></pre>
+<h4>Effective immediately after writing.gitignore</h4>
+<pre><code class="language-shell">#Clear cache  
+git rm -r --cached .  
+
+#Retrace file  
+git add . 
+
+#Submission and comments 
+git commit -m &quot;update .gitignore&quot; 
+</code></pre>
+<h4>Type tag</h4>
+<pre><code class="language-shell">#hit tag
+git tag -a v1.0.0 -m &quot;feat:xxx&quot;
+
+#Display content
+git show v1.0 
+
+#Push this tag to the remote location
+git push origin v1.0.0 
+
+#If you want to push all local new tags up at once
+git push origin --tags 
+</code></pre>
+<h4>Delete tag</h4>
+<pre><code class="language-shell">#Delete local tags
+git tag -d tagName 
+
+#Delete remote tags
+git push origin :refs/tags/tagName
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

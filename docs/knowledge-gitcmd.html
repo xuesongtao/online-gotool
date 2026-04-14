@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,62 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 Git命令, 速查表, Git教程, 版本控制 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，Git常用命令速查表 | 在线Git命令手册 - GoTool在线工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h4>将本地项目推送到远程仓库</h4>
+<pre><code class="language-shell">git init 
+
+git add .
+
+git commit -m &quot;feat: xxx&quot;
+
+git remote add origin https://xxx
+
+git pull --rebase origin xxx
+
+git push -u origin xxx
+</code></pre>
+<h4>编写了 .gitignore 后立即生效</h4>
+<pre><code class="language-shell"># 清除缓存  
+git rm -r --cached .  
+
+# 重新trace file  
+git add . 
+
+# 提交和注释 
+git commit -m &quot;update .gitignore&quot; 
+</code></pre>
+<h4>打 tag</h4>
+<pre><code class="language-shell"># 打 tag
+git tag -a v1.0.0 -m &quot;feat:xxx&quot;
+
+# 显示内容
+git show v1.0 
+
+# 将此 tag 推送到远程
+git push origin v1.0.0 
+
+# 如果要一次推送所有本地新增的标签上去
+git push origin --tags 
+</code></pre>
+<h4>删除操作</h4>
+<pre><code class="language-shell"># 删除本地 tag
+git tag -d tagName 
+
+# 删除远程 tag
+git push origin :refs/tags/tagName
+
+# 删除本地分支
+git branch -d name
+# 强制删除
+git branch -D name
+
+# 删除远程分支
+git push origin -d name
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

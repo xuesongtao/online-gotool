@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,119 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 Nginx Configuration, Reverse Proxy, Load Balancer, HTTPS Configuration 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，Nginx Configuration Quick Check Manual| Common configuration examples- GoTool Online Toolset 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h4><strong>Log Rotation Configuration</strong></h4>
+<ul>
+<li>During the operation of <strong>Nginx/OpenResty</strong>, access and error logs continuously grow. Over time, large log files can impact performance and management. Therefore, logs should be <strong>rotated daily</strong> or <strong>by file size</strong> for better organization, storage, and analysis.</li>
+<li>The <code>logrotate</code> tool is used for log management. It is a Linux utility that automates log rotation, compression, and deletion of old logs.</li>
+</ul>
+<h5><strong>Step 1: Create a <code>logrotate</code> Configuration File</strong></h5>
+<p>Add the following configuration to <code>/etc/logrotate.d/openresty</code>:</p>
+<pre><code class="language-sh"># Log rotation for OpenResty
+#/usr/local/openresty/nginx/logs/*.log {
+#    daily  # Rotate logs daily
+#    rotate 7  # Keep the last 7 days of logs
+#    missingok  # Ignore missing files
+#    notifempty  # Skip rotation if the log is empty
+#    compress  # Compress old logs using gzip
+#    delaycompress  # Delay compression by one day
+#    postrotate
+#        /bin/kill -USR1 `cat /usr/local/openresty/nginx/logs/nginx.pid 2&gt;/dev/null` 2&gt;/dev/null || true
+#    endscript
+#}
+/usr/local/openresty/nginx/logs/*.log {
+    create 0664 
+    daily
+    rotate 7
+    missingok
+    notifempty
+    compress
+    delaycompress
+    postrotate
+        /bin/kill -USR1 `cat /usr/local/openresty/nginx/logs/nginx.pid 2&gt;/dev/null` 2&gt;/dev/null || true
+    endscript
+}
+</code></pre>
+<h5><strong>Step 2: Manually Test <code>logrotate</code></strong></h5>
+<pre><code class="language-sh">logrotate -f /etc/logrotate.d/openresty
+</code></pre>
+<hr>
+<h4><strong>Location Syntax</strong></h4>
+<p>The <code>location</code> block is used to match client request URIs.</p>
+<h5><strong>Basic Syntax:</strong></h5>
+<p>There are four optional parameters for URI matching, and a named location (<code>@</code>) for internal routing.</p>
+<pre><code class="language-sh">location [ = | ~ | ~* | ^~ ] /URI { … }
+location @/name/ { … }
+</code></pre>
+<p>| Parameter | Explanation                                                                                                            |
+| --------- | ---------------------------------------------------------------------------------------------------------------------- |
+| (none)    | Standard prefix match (matches from the beginning of the URI).                                                         |
+| <code>=</code>       | Exact match (if matched, processing stops immediately).                                                                |
+| <code>^~</code>      | Prefix match with priority (if matched, regex locations are ignored). Used for directories.                            |
+| <code>~</code>       | Regex match (case-sensitive).                                                                                          |
+| <code>~*</code>      | Regex match (case-insensitive).                                                                                        |
+| <code>@</code>       | Named location for internal redirects (e.g., <code>error_page</code>, <code>try_files</code>). Functions similarly to <code>goto</code> in programming. |</p>
+<hr>
+<h4><strong>Matching Order in Nginx</strong></h4>
+<ul>
+<li>Nginx first matches the <strong>server</strong> block based on domain, IP, and port.</li>
+<li>Within a <code>server</code>, Nginx matches <code>location</code> blocks <strong>in the following priority order:</strong></li>
+</ul>
+<pre><code class="language-sh">1. location =    # Exact match (highest priority)
+2. location ^~   # Prefix match (if matched, regex locations are ignored)
+3. location ~    # Case-sensitive regex match
+4. location ~*   # Case-insensitive regex match
+5. location /a   # Standard prefix match (lower priority than `^~`)
+6. location /    # Default fallback (matches anything not handled above)
+</code></pre>
+<p><strong>Note:</strong></p>
+<ul>
+<li><strong>Rules 1-4 stop matching immediately upon success.</strong></li>
+<li><strong>Rule 5 selects the longest prefix match if no higher-priority match exists.</strong></li>
+</ul>
+<hr>
+<h4><strong>CORS Configuration (Cross-Origin Resource Sharing)</strong></h4>
+<p>To enable cross-origin requests in Nginx, use the following configuration:</p>
+<pre><code class="language-sh">location / {  
+    add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+    add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+
+    if ($request_method = 'OPTIONS') {
+        return 204;
+    }
+    proxy_pass http://192.168.12.1:8081;
+} 
+</code></pre>
+<hr>
+<h4><strong><code>if</code> Syntax in Nginx</strong></h4>
+<h5><strong>1. Regular Expression Matching:</strong></h5>
+<ul>
+<li><code>==</code> → Exact match</li>
+<li><code>~</code> → Regex match (case-sensitive)</li>
+<li><code>~*</code> → Regex match (case-insensitive)</li>
+<li><code>!~</code> → Negative regex match (case-sensitive)</li>
+<li><code>!~*</code> → Negative regex match (case-insensitive)</li>
+</ul>
+<h5><strong>2. File Handling Conditions:</strong></h5>
+<ul>
+<li><code>-f</code>, <code>!-f</code> → Check if the path exists and is a file</li>
+<li><code>-d</code>, <code>!-d</code> → Check if the path exists and is a directory</li>
+<li><code>-e</code>, <code>!-e</code> → Check if the path exists (file or directory)</li>
+<li><code>-x</code>, <code>!-x</code> → Check if the path exists and is executable</li>
+</ul>
+<hr>
+<h4><strong>Security: Preventing Bot Traffic &amp; Penalizing Suspicious Requests</strong></h4>
+<pre><code class="language-sh"># Block bots and malicious requests
+if ($request_uri ~* \.(php|txt|sh|sql|tar)) {
+    rewrite (.*)  http://speedtest.tele2.net/50GB.zip permanent;
+    break;
+}
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

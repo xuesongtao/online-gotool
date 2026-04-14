@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,79 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 SCP命令, 安全复制, 文件传输, Linux命令 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，SCP命令操作指南 | 安全文件传输 - GoTool在线工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3><code>scp</code> 命令速查笔记</h3>
+<h4>基本语法</h4>
+<pre><code class="language-bash">scp [参数] [源路径] [目标路径]
+</code></pre>
+<hr>
+<h4>常用操作示例</h4>
+<h5>1. 上传本地文件到远程服务器</h5>
+<pre><code class="language-bash">scp ./file.txt user@192.168.1.10:/home/user/
+</code></pre>
+<h5>2. 从远程服务器下载文件到本地</h5>
+<pre><code class="language-bash">scp user@192.168.1.10:/home/user/file.txt ./file.txt
+</code></pre>
+<h5>3. 上传目录到远程服务器</h5>
+<pre><code class="language-bash">scp -r ./mydir user@192.168.1.10:/home/user/
+</code></pre>
+<h5>4. 从远程服务器下载目录到本地</h5>
+<pre><code class="language-bash">scp -r user@192.168.1.10:/home/user/mydir ./mydir
+</code></pre>
+<h5>5. 使用指定端口（如 2222）</h5>
+<pre><code class="language-bash">scp -P 2222 ./file.txt user@192.168.1.10:/home/user/
+</code></pre>
+<h5>6. 使用指定私钥文件</h5>
+<pre><code class="language-bash">scp -i ~/.ssh/id_rsa ./file.txt user@192.168.1.10:/home/user/
+</code></pre>
+<hr>
+<h4>常用参数说明</h4>
+<p>| 参数 | 说明                             |
+| ---- | -------------------------------- |
+| <code>-r</code> | 递归复制整个目录                 |
+| <code>-P</code> | 指定远程主机端口（注意是大写 P） |
+| <code>-i</code> | 指定 SSH 私钥文件                |
+| <code>-C</code> | 启用压缩，提高传输速度           |
+| <code>-p</code> | 保留文件的修改时间、权限等属性   |
+| <code>-q</code> | 静默模式，不输出进度信息         |</p>
+<hr>
+<h4>路径说明</h4>
+<p>| 类型     | 示例                                  |
+| -------- | ------------------------------------- |
+| 本地路径 | <code>./file.txt</code> 或 <code>/home/user/file.txt</code> |
+| 远程路径 | <code>user@host:/path/to/file.txt</code>         |</p>
+<hr>
+<h4>常见错误排查</h4>
+<p>| 错误                           | 可能原因                                                  |
+| ------------------------------ | --------------------------------------------------------- |
+| <code>Permission denied</code>            | SSH 密钥无效，或远程目录无写权限                          |
+| <code>No such file or directory</code>    | 源或目标路径写错                                          |
+| <code>Connection refused</code>           | 目标端口不通或 SSH 服务未开启                             |
+| <code>Host key verification failed</code> | 第一次连接远程主机，未接受主机指纹。可先用 <code>ssh</code> 登录一次 |</p>
+<hr>
+<h4>实用补充</h4>
+<h5>拷贝文件到另一台远程服务器</h5>
+<pre><code class="language-bash">scp user1@host1:/path/file.txt user2@host2:/path/
+</code></pre>
+<blockquote>
+<p>当前机器必须能访问 host1 和 host2</p>
+</blockquote>
+<h5>批量上传文件（脚本示例）</h5>
+<pre><code class="language-bash">for f in *.log; do
+  scp &quot;$f&quot; user@host:/var/logs/
+done
+</code></pre>
+<hr>
+<h4>常用命令模板</h4>
+<pre><code class="language-bash">scp ./local.txt user@host:/remote/path/
+scp user@host:/remote/file.txt ./local/
+scp -r ./dir user@host:/remote/
+scp -i ~/.ssh/key.pem -P 2222 ./file user@host:/dest/
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

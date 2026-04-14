@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,50 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 text similarity, similarity calculation, Levenshtein, Jaccard, document similarity 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，Online text similarity calculation tool| Support for Levenshtein/Jaccard - GoTool online toolset 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>Algorithm Introduction</h3>
+<h4>Introduction to Jaccard Algorithm (for long text)</h4>
+<blockquote>
+<p>1.Jaccard similarity, also known as Jaccard index or Jaccard coefficient, is a statistic used to measure the similarity of two sets (** can be divided by ngram **). It is defined as the ratio between the intersection and the union of two sets. It is mainly used to calculate the similarity between sets, and is widely used in information retrieval/text analysis/image processing and other fields.<br>
+2. In particular, given two sets A and 𝐵, Jaccard similarity <code>𝐽 (𝐴, 𝐵</code>) is defined as:</p>
+</blockquote>
+<pre><code class="language-js">J(A,B)= ∣A ∩ B∣ / ∣A u B∣
+
+// ∣A∩B∣ denote the number of intersection elements of sets A and B.
+// ∣AuB∣ denotes the number of elements of the union of sets A and B.
+
+</code></pre>
+<ol start="3">
+<li>The Jaccard similarity ranges from 0 to 1:</li>
+</ol>
+<pre><code class="language-js">// when 𝐽(𝐴,𝐵) = 1, the two sets are exactly the same
+// when 𝐽(𝐴,𝐵) = 0, the two sets are completely different
+</code></pre>
+<!-- raw HTML omitted -->
+<h4>Introduction to Levenshtein algorithm (suitable for short text)</h4>
+<blockquote>
+<p>1.Levenshtein distance, also known as edit distance, is a metric used to measure the similarity between two strings. It is defined as the minimum number of editing operations required to convert one string to another. The allowed editing operations include inserting a character/deleting a character/replacing a character.<br>
+2. Treatment is as follows:</p>
+</blockquote>
+<pre><code class="language-js">// Suppose there are two strings:
+s1 = &quot;kitten&quot;
+s2 = &quot;sitting&quot;
+// Calculate their Levenshtein distance:
+
+// replace &quot;k&quot; with &quot;s&quot;: kitten -&gt;; sitten (1 operation)
+// replace &quot;e&quot; with &quot;i&quot;: sitten -&gt;; sittin (1 operation)
+// Insert &quot;g&quot; at the end: sittin -&gt;; sitting (1 operation)
+// Thus, the Levenshtein distance
+Levenshtein(&quot;kitten&quot;,&quot;sitting&quot;)=3
+
+// similarity (maxlen-Levenshtein)/maxLen
+maxLen=max(s1.length, s2.length)
+res=(maxLen-3)/maxLen
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

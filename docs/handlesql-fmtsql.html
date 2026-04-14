@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,39 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 SQL格式化, 在线SQL美化, 多数据库SQL, 代码格式化, 数据库工具 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，在线SQL格式化工具 | 支持MySQL/PostgreSQL/Oracle等 - GoTool在线工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>功能介绍</h3>
+<blockquote>
+<p>1.多数据库在线sql格式化,支持(<strong>oracle/pg/mysql</strong>等)多种数据库sql格式化<br>
+2.支持关键字大小写<br>
+3.去注释</p>
+</blockquote>
+<h3>示例</h3>
+<pre><code class="language-sql">create table if not exists user (
+    id int not null auto_increment,
+    name varchar(10) not null comment '姓名',
+    gender tinyint not null default 0 comment '性别 0-未知 1-男 2-女',
+    age int not null comment '年龄',
+    created_date datetime default current_timestamp,
+    updated_date datetime default current_timestamp on update current_timestamp,
+    primary key (id)
+);
+</code></pre>
+<p>处理后</p>
+<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS user (
+    id INT NOT NULL auto_increment,
+    name VARCHAR(10) NOT NULL comment '姓名',
+    gender TINYINT NOT NULL DEFAULT 0 comment '性别 0-未知 1-男 2-女',
+    age INT NOT NULL comment '年龄',
+    created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

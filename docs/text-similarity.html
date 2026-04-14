@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,48 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 文本相似度, 相似度计算, Levenshtein, Jaccard, 文档相似度 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，在线文本相似度计算工具 | 支持Levenshtein/Jaccard - GoTool在线工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>算法介绍</h3>
+<h4>Jaccard 算法介绍(适用于长文本)</h4>
+<blockquote>
+<p>1.Jaccard 相似度(Jaccard similarity),也称为 Jaccard 指数或 Jaccard 系数, 是一种用于衡量两个集合相似度(<strong>可以通过 ngram 进行分词</strong>)的统计量. 其定义为两个集合的交集与并集的比值。它主要用于计算集合间的相似度, 广泛应用于信息检索/文本分析/图像处理等领域.<br>
+2.具体来说，给定两个集合 A 和 𝐵, Jaccard 相似度 <code>𝐽(𝐴,𝐵)</code> 定义为:</p>
+</blockquote>
+<pre><code class="language-js">J(A,B)= ∣A ∩ B∣ / ∣A u B∣
+
+// ∣A∩B∣ 表示集合 A 和 B 的交集元素的数量。
+// ∣AuB∣ 表示集合 A 和 B 的并集元素的数量。
+
+</code></pre>
+<p>3.Jaccard 相似度的取值范围在 0 到 1 之间:</p>
+<pre><code class="language-js">// 当时 𝐽(𝐴,𝐵) = 1，表示两个集合完全相同
+// 当时 𝐽(𝐴,𝐵) = 0，表示两个集合完全不相同
+</code></pre>
+<!-- raw HTML omitted -->
+<h4>Levenshtein 算法介绍(适用于短文本)</h4>
+<blockquote>
+<p>1.Levenshtein 距离 (Levenshtein distance) 也称为编辑距离 (edit distance) 是一种用于衡量两个字符串之间相似度的度量方法. 它定义为将一个字符串转换为另一个字符串所需的最少编辑操作次数. 允许的编辑操作包括插入一个字符/删除一个字符/替换一个字符.<br>
+2.处理如下:</p>
+</blockquote>
+<pre><code class="language-js">// 假设有两个字符串：
+s1 = &quot;kitten&quot;
+s2 = &quot;sitting&quot;
+// 计算它们的 Levenshtein 距离：
+
+// 将 &quot;k&quot; 替换为 &quot;s&quot;: kitten -&gt; sitten （1 次操作）
+// 将 &quot;e&quot; 替换为 &quot;i&quot;: sitten -&gt; sittin （1 次操作）
+// 在末尾插入 &quot;g&quot;: sittin -&gt; sitting （1 次操作）
+// 因此, Levenshtein 距离
+Levenshtein(&quot;kitten&quot;,&quot;sitting&quot;)=3
+
+// 相似度 (maxLen-Levenshtein)/maxLen
+maxLen=max(s1.length, s2.length)
+res=(maxLen-3)/maxLen
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

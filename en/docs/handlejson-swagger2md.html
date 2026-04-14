@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,73 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 Swagger to Markdown, Swagger to Markdown, Swagger document generation, Swagger to table structure, online Swagger tool, Markdown table, Swagger documentation, Swagger Doc, Schema document, Swagger to MD, Swagger to Markdown 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，Swagger to Markdown tool| Generating API documentation- GoTool Online Toolkit 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>🛠 Feature Overview</h3>
+<p>The Swagger to Markdown tool allows you to instantly convert Swagger/OpenAPI interface documentation into structured Markdown documents, making it easy to organize, archive, and share API specifications.</p>
+<h3>🚀 How to Use</h3>
+<ol>
+<li>Upload a Swagger/OpenAPI file (e.g., .json), or paste the API documentation content directly.</li>
+<li>Customize options such as whether to include titles and the starting number.</li>
+<li>Generate the Markdown document with one click, ready to copy or download.</li>
+</ol>
+<h3>⚙️ Parameter Description</h3>
+<ul>
+<li><strong>File Upload Mode</strong>: Upload a local Swagger file to automatically convert it to Markdown.</li>
+<li><strong>Text Mode</strong>: Paste Swagger content, supporting the following parameters:
+<ul>
+<li><code>need_title</code>: Whether to generate a title for each endpoint (default: false).</li>
+<li><code>start_no</code>: The starting number for endpoint numbering (default: 1).</li>
+</ul>
+</li>
+</ul>
+<h3>📋 Example</h3>
+<h4>Input (Swagger JSON Example)</h4>
+<pre><code class="language-json">{
+	&quot;swagger&quot;: &quot;2.0&quot;,
+	&quot;info&quot;: { &quot;title&quot;: &quot;API Example&quot;, &quot;version&quot;: &quot;1.0.0&quot; },
+	&quot;paths&quot;: {
+		&quot;/user&quot;: {
+			&quot;get&quot;: {
+				&quot;summary&quot;: &quot;Get user info&quot;,
+				&quot;responses&quot;: { &quot;200&quot;: { &quot;description&quot;: &quot;Success&quot; } }
+			}
+		}
+	}
+}
+</code></pre>
+<h4>Output (Markdown Example)</h4>
+<pre><code class="language-markdown"># API Example API Documentation 1.0.0
+
+## 1
+
+### 1.1 Get user info
+
+- **Path**: `/user`
+- **Method**: `GET`
+- **Description**:
+
+#### Request Example
+
+- `curl -X GET &quot;http://xxx.com/user&quot;`
+
+#### Response
+
+##### 200
+</code></pre>
+<h3>💡 Scenarios</h3>
+<ul>
+<li>Quickly generate API documentation for team collaboration and integration</li>
+<li>Support for archiving API docs, API review, and knowledge base accumulation</li>
+</ul>
+<h3>📝 Notes</h3>
+<ul>
+<li>Supports Swagger 2.0 and OpenAPI 3.0 standard formats</li>
+<li>Only converts document structure, does not validate API correctness</li>
+</ul>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

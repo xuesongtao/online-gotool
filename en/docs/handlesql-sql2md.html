@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,42 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 SQL to Markdown, DDL to Markdown, table-building statements to documents, SQL to table structure, SQL document generation, database document, table structure export, MySQL to Markdown, PostgreSQL to Markdown, Oracle to Markdown, online SQL tools, Markdown tables, DDL documentation, SQL Doc, Schema document, SQL to MD, DDL to Markdown, SQL to Markdown 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，Online SQL to Markdown| Generating a database table structure document- GoTool Online Toolkit 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <p>###Function introduction</p>
+<blockquote>
+<ol>
+<li>Support SQL to csv table creation for multiple databases, including (pg, oracle, mysql) and other databases; ** table creation statements **, ** table creation statements **, ** table creation statements **(Say the important three times)</li>
+<li>When converting sql, you need to confirm whether you need to switch processing types. Three processing methods are temporarily supported (<strong>normal</strong>, <strong>postgresql</strong>, <strong>oracle</strong>). Default: <strong>normal</strong>.</li>
+</ol>
+</blockquote>
+<!-- raw HTML omitted -->
+<p>###Example</p>
+<pre><code class="language-sql">CREATE TABLE if not exists user (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(10) NOT NULL COMMENT 'name',
+    gender tinyint NOT NULL DEFAULT 0 COMMENT 'Gender 0-Unknown 1-Male 2-Femal',
+    age int NOT NULL COMMENT 'age',
+    created_date datetime DEFAULT CURRENT_TIMESTAMP,
+    updated_date datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+</code></pre>
+<p>After treatment</p>
+<pre><code class="language-md">## User
+
+| serial number | field name   | type        | non-empty | key | default value     | described                        |
+| ------------: | ------------ | ----------- | --------- | --- | ----------------- | -------------------------------- |
+|             1 | id           | int         | NO        | PRI |                   |                                  |
+|             2 | name         | varchar(10) | NO        |     |                   | name                             |
+|             3 | gender       | tinyint     | NO        |     | 0                 | Gender 0-Unknown 1-Male 2-Female |
+|             4 | age          | int         | NO        |     |                   | age                              |
+|             5 | created_date | datetime    | YES       |     | CURRENT_TIMESTAMP |                                  |
+|             6 | updated_date | datetime    | YES       |     | CURRENT_TIMESTAMP |                                  |
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

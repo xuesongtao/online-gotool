@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,30 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 url編碼, url解碼, urlencode, urldecode, 在線工具 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，在線url編解碼工具|編碼/解碼特殊字符 - gotool在線工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>功能介紹</h3>
+<p>1.使用 JavaScript 的 <strong><code>encodeURI</code></strong> 和 <strong><code>encodeURIComponent</code></strong> 進行編碼。
+2.使用 JavaScript 的 <strong><code>decodeURIComponent</code></strong> 進行解碼。</p>
+<h3>方法介紹</h3>
+<h4><code>encodeURI</code></h4>
+<ul>
+<li><strong>用途</strong>: 用於編碼整個 URI。例如：<code>&quot;http://example.com/這是測試?name=張三&quot;</code>。</li>
+<li><strong>編碼規則</strong>: 只會編碼在 URI 中具有特殊意義的字元，如空格（編碼為 <code>%20</code>）、<code>#</code>（編碼為 <code>%23</code>）等。不會編碼以下字元：<code>A-Z</code>、<code>a-z</code>、<code>0-9</code>、<code>-</code>、<code>_</code>、<code>.</code>、<code>!</code>、<code>~</code>、<code>*</code>、<code>'</code>、<code>(</code>、<code>)</code>、<code>;</code>、<code>/</code>、<code>?</code>、<code>:</code>、<code>@</code>、<code>&amp;</code>、<code>=</code>、<code>+</code>、<code>$</code>、<code>,</code>，因為這些字元在 URI 中具有特定意義。</li>
+</ul>
+<h4><code>encodeURIComponent</code></h4>
+<ul>
+<li><strong>用途</strong>: 用於編碼 URI 的一部分（例如查詢參數的值），而不是整個 URI。例如：<code>&quot;name=張三&amp;age=25&quot;</code>。</li>
+<li><strong>編碼規則</strong>: <code>encodeURIComponent</code> 會編碼所有非字母數位字元，包括 <code>;</code>、<code>/</code>、<code>?</code>、<code>:</code>、<code>@</code>、<code>&amp;</code>、<code>=</code>、<code>+</code>、<code>$</code>、<code>,</code> 等，因為這些字元在 URI 元件中沒有特殊意義，所以都被編碼。</li>
+</ul>
+<h4><code>decodeURIComponent</code></h4>
+<ul>
+<li><strong>用途</strong>: 用於解碼單個 URI 元件（如查詢參數的值），將 <code>encodeURIComponent</code> 編碼的字元還原為原始字元。</li>
+<li><strong>解碼規則</strong>: <code>decodeURIComponent</code> 會解碼所有由 <code>encodeURIComponent</code> 編碼的字元，將 <code>%</code> 開頭的編碼轉換回對應的字元。例如，<code>%20</code> 會被解碼為空格，<code>%3D</code> 會被解碼為 <code>=</code>。</li>
+</ul>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

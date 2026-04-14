@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,112 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 es轉java, es文檔轉java, elasticsearch轉java, java實體類生成, es schema轉換, 在線es工具, 接口文檔生成, es文檔化, api文檔轉java 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，es 轉 java 工具|在線 es 文檔轉 java 實體類生成器|gotool在線工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>功能介紹</h3>
+<blockquote>
+<p>1.將 <code>mapping</code> 中的 <code>properties</code> 內容轉為 <code>struct</code>, 如下:</p>
+</blockquote>
+<pre><code class="language-json">{
+	&quot;mappings&quot;: {
+		&quot;properties&quot;: {
+			&quot;doc_id&quot;: {
+				&quot;type&quot;: &quot;keyword&quot;
+			},
+			&quot;id&quot;: {
+				&quot;type&quot;: &quot;long&quot;
+			},
+			&quot;path&quot;: {
+				&quot;type&quot;: &quot;keyword&quot;
+			},
+			&quot;name&quot;: {
+				&quot;type&quot;: &quot;text&quot;
+			},
+			&quot;url&quot;: {
+				&quot;type&quot;: &quot;keyword&quot;
+			},
+			&quot;description&quot;: {
+				&quot;type&quot;: &quot;text&quot;
+			},
+			&quot;created_time&quot;: {
+				&quot;type&quot;: &quot;date&quot;,
+				&quot;format&quot;: &quot;yyyy-MM-dd HH:mm:ss&quot;
+			}
+		}
+	}
+}
+</code></pre>
+<p>處理後</p>
+<pre><code class="language-java">public class Es2StructTmp {
+    private String created_time;
+    private String description;
+    private String doc_id;
+    private Integer id;
+    private String name;
+    private String path;
+    private String url;
+    public String getCreated_time() {
+        return this.created_time;
+    }
+
+    public void setCreated_time(String created_time) {
+        this.created_time = created_time;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDoc_id() {
+        return this.doc_id;
+    }
+
+    public void setDoc_id(String doc_id) {
+        this.doc_id = doc_id;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPath() {
+        return this.path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getUrl() {
+        return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+}
+
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">

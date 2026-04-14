@@ -38,6 +38,12 @@
         .back-link { margin-top: 2rem; display: block; color: #64748b; text-decoration: none; }
         .back-link:hover { color: #1e293b; }
         .feature-item { margin-bottom: 1.5rem; }
+         
+        .markdown-content { line-height: 1.8; color: #475569; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #1e293b; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .markdown-content p { margin-bottom: 1rem; }
+        .markdown-content ul { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -55,14 +61,42 @@
 
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">💡 功能亮点 & 使用方案</h3>
-                    <div class="feature-item">
-                        <h5>批量处理与即时预览</h5>
-                        <p class="text-muted">支持 Go Struct 转 TypeScript, Go转TS工具, Go结构体转TS接口, go struct转ts类型,在线go转ts, golang结构体转typescript, Go接口转TS, golang to typescript 等多种核心模式，所有操作均在浏览器端或安全可靠的服务端完成，确保数据隐私的同时提供极速反馈。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h5>真实开发案例</h5>
-                        <p class="text-muted">无论是 API 联调时的 JSON 转换，还是数据库迁移时的 SQL 生成，Go Struct转TypeScript | 生成TS接口定义 - GoTool在线工具集 都能帮您节省 90% 以上的手动录入时间。</p>
-                    </div>
+        
+            <div class="markdown-content">
+                <h3>🛠 功能简介</h3>
+<p>该工具可将 Go 语言中的 <code>struct</code> 结构体转换为 TypeScript 类型定义（interface 或 type），支持解析常见基础类型、数组、map、嵌套结构体、<code>json</code> 标签等。</p>
+<h3>✅ 支持的 Go 类型</h3>
+<p>| Go 类型               | TypeScript 类型 |
+| --------------------- | --------------- |
+| <code>string</code>              | <code>string</code>        |
+| <code>int</code> / <code>int64</code>       | <code>number</code>        |
+| <code>float32</code> / <code>float64</code> | <code>number</code>        |
+| <code>bool</code>                | <code>boolean</code>       |
+| <code>[]T</code>                 | <code>T[]</code>           |
+| <code>T</code>                   | <code>T</code>             |
+| <code>other</code>               | <code>string</code>        |</p>
+<h3>📝 使用示例</h3>
+<h4>输入 Go 结构体：</h4>
+<pre><code class="language-go">type User struct {
+  ID        int       `json:&quot;id&quot;`
+  Name      string    `json:&quot;name&quot;`
+  Email     string    `json:&quot;email&quot;`
+  CreatedAt time.Time `json:&quot;created_at&quot;`
+  Tags      []string  `json:&quot;tags&quot;`
+}
+</code></pre>
+<h4>输出 TypeScript 类型：</h4>
+<pre><code class="language-ts">interface User {
+  id: number;
+  name: string;
+  email: string;
+  created_at: string;
+  tags: string[];
+}
+</code></pre>
+
+            </div>
+        
                 </div>
                 
                 <div class="cta-box">
