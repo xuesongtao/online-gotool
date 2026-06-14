@@ -100,13 +100,34 @@
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">使用说明</h3>
         
-            <div class="feature-item">
-                <h5>即时处理</h5>
-                <p class="text-muted">支持 yaml转struct, yaml转go struct, yaml注释解析, go结构体生成，操作简便安全。</p>
-            </div>
-            <div class="feature-item">
-                <h5>实际场景</h5>
-                <p class="text-muted">Yaml转Struct - 在线YAML转Go Struct工具 | GoTool在线工具集 服务于各种日常开发需求，帮助提升效率。</p>
+            <div class="markdown-content">
+                <h3 id="heading">功能介绍</h3>
+<blockquote>
+<p>在线yaml转struct, 同时支持解析注释</p>
+</blockquote>
+<h3 id="heading-1">示例</h3>
+<pre><code class="language-yaml">name: 示例项目 # 项目名称
+version: 1.0.0 # 版本号
+description: 这是一个示例项目的描述 # 项目描述
+authors:
+  - name: 张三 # 作者姓名
+  - name: 李四 # 作者姓名
+</code></pre>
+<p>处理后</p>
+<pre><code class="language-go">type Authors struct {
+    Name string `json:&quot;name&quot; yaml:&quot;name&quot;` // 作者姓名
+}
+
+
+type GenerateObj struct {
+    Name string `json:&quot;name&quot; yaml:&quot;name&quot;` // 项目名称
+    Version string `json:&quot;version&quot; yaml:&quot;version&quot;` // 版本号
+    Description string `json:&quot;description&quot; yaml:&quot;description&quot;` // 项目描述
+    Authors []Authors `json:&quot;authors&quot; yaml:&quot;authors&quot;`
+}
+
+</code></pre>
+
             </div>
         
                 </div>

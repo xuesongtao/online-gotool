@@ -100,13 +100,32 @@
                 <div class="mb-5">
                     <h3 class="fw-bold mb-4">使用说明</h3>
         
-            <div class="feature-item">
-                <h5>即时处理</h5>
-                <p class="text-muted">支持 yaml to struct, yaml to go struct, yaml annotation parsing, go structure generation，操作简便安全。</p>
-            </div>
-            <div class="feature-item">
-                <h5>实际场景</h5>
-                <p class="text-muted">Yaml to Struct -Online YAML to Go Struct Tool| GoTool online toolset 服务于各种日常开发需求，帮助提升效率。</p>
+            <div class="markdown-content">
+                <h3 id="features">Features</h3>
+<blockquote>
+<p>Convert YAML to Go Struct online, with support for parsing and preserving YAML comments.</p>
+</blockquote>
+<h3 id="example">Example</h3>
+<pre><code class="language-yaml">name: Sample Project # Project name
+version: 1.0.0 # Version number
+description: This is a sample project description # Project description
+authors:
+  - name: John Doe # Author name
+  - name: Jane Smith # Author name
+</code></pre>
+<p>Generated Result</p>
+<pre><code class="language-go">type Authors struct {
+    Name string `json:&quot;name&quot; yaml:&quot;name&quot;` // Author name
+}
+
+type GenerateObj struct {
+    Name string `json:&quot;name&quot; yaml:&quot;name&quot;` // Project name
+    Version string `json:&quot;version&quot; yaml:&quot;version&quot;` // Version number
+    Description string `json:&quot;description&quot; yaml:&quot;description&quot;` // Project description
+    Authors []Authors `json:&quot;authors&quot; yaml:&quot;authors&quot;`
+}
+</code></pre>
+
             </div>
         
                 </div>
